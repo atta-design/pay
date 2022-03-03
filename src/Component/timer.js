@@ -3,7 +3,7 @@ import axios from "axios";
 
 const Timer = () => {
   const[resendMassage,setResendMassege]=useState(()=>()=>{})
-  const [counter, setCounter] = React.useState(60);
+  const [counter, setCounter] = React.useState(5);
   React.useEffect(() => {
     counter > 0 && setTimeout(() => setCounter(counter - 1), 1000);
   }, [counter]);
