@@ -12,7 +12,7 @@ url("/src/fonts/") format("svg"); */
     margin:0;
     padding:0;
     font-family:'CustomFont', Arial, sans-serif!important;
-    background-color: rgb(5, 74, 119)!important;
+    background-color: rgb(39, 136, 201)!important;
   }
   
   .login-box {
@@ -189,4 +189,55 @@ url("/src/fonts/") format("svg"); */
 }
 label{
   text-align: right!important;
+}
+.bank{
+top: 0;
+ margin-left: 56vw;
+ margin-top: -250px;
+ margin-bottom: 190px;
+ position: sticky!important;
+}
+.bankName{
+  margin: 10px;
+  margin-left: -6vw!important;
+}
+@media only screen and (max-width: 1300px) {
+  .bank {
+    margin-left: 60vw;
+  }
+  .bankName{
+    margin: 10px;
+    margin-left: -10vw!important;
+  }
+}
+@media only screen and (max-width: 1000px) {
+  .bank {
+    margin-left: 64vw;
+  }
+  .bankName{
+    margin: 10px;
+    margin-left: -13vw!important;
+  }
+}
+@media only screen and (max-width: 576px) {
+  .bank {
+    margin-left: 64vw;
+    width: 20px;
+    font-size: 10px;
+  }
+  .bankName{
+    margin: 10px;
+    margin-left: -20vw!important;
+  }
+}
+@media only screen and (max-width: 407px) {
+  .bank {
+    margin-left: 64vw;
+    width: 20px;
+    font-size: 10px;
+  }
+  .bankName{
+    margin: 10px;
+    margin-left: -30vw!important;
+  }
 }

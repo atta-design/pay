@@ -1,17 +1,34 @@
-import React from 'react'
+import React,{useState} from "react";
+import axios from "axios";
 
-function Timer() {
-
+const Timer = () => {
+  const[resendMassage,setResendMassege]=useState(()=>()=>{})
   const [counter, setCounter] = React.useState(60);
-    React.useEffect(() => {
-              counter > 0 && setTimeout(() => setCounter(counter - 1), 1000);
-            }, [counter]);
-         
-    return (
-        <div>
-         <p style={{color:'white'}}>{counter}</p>   
-        </div>
-    )
-}
-
-export default Timer
+  React.useEffect(() => {
+    counter > 0 && setTimeout(() => setCounter(counter - 1), 1000);
+  }, [counter]);
+ const handleresend=()=>{
+  const getfunction={
+    ResendMassage:resendMassage
+  }
+  axios
+  .post(`https://jsonplaceholder.typicode.com/users`, {getfunction})
+  .then((res) => {
+    console.log(res);
+    console.log(res.data);
+  });
+ }
+  
+  return (
+    <div className="d-flex flex-row-reverse">
+      <p>{counter}&nbsp; </p>
+      <p>ثانیه دیگر می توانید مجددا درخواست ارسال کد کنید</p>
+      {counter === 0 && (
+        <button onClick={handleresend} type="button" className="btn">
+          دریافت مجدد
+        </button>
+      )}
+    </div>
+  );
+};
+export default Timer;
