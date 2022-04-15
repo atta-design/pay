@@ -1,22 +1,26 @@
 import React, { Component } from "react";
-import "./css/credit-card.css";
-import "./css/form-style.css";
+import "../css/credit-card.css";
+import "../css/form-style.css";
 import Cards from "react-credit-cards";
 import Timer from "./timer";
 import swal from "sweetalert";
 import axios from "axios";
 import Bank from "./bank";
 
-class Creditcard extends Component {
+import { MDBInput } from 'mdbreact';
+class CreditCard extends Component {
   timeoutID;
   constructor(props) {
     super(props);
-
+    this.myRef = React.createRef();
+    this.myRefcvv = React.createRef();
     this.state = {
+      cvvFocus:false,
+      toggle:false,
       stage: 1,
       cvc: "",
       expiry: "",
-      expiryyear: "",
+      expiryYear: "",
       focus: "",
       number: "",
       password: "",
@@ -28,41 +32,7 @@ class Creditcard extends Component {
   }
 
   setup = () => {
-    //if any of the events fire, it resets the timer
-    // window.addEventListener("keypress", () => {
-    //   this.resetTimer();
-    // });
-    // window.addEventListener("keyup", () => {
-    //   this.resetTimer();
-    // });
-    // window.addEventListener("scroll", () => {
-    //   this.resetTimer();
-    // });
-    // window.addEventListener("keydown", () => {
-    //   this.resetTimer();
-    // });
-    // window.addEventListener("mousemove", () => {
-    //   this.resetTimer();
-    // });
-    // window.addEventListener("mousewheel", () => {
-    //   this.resetTimer();
-    // });
-    // window.addEventListener("mousedown", () => {
-    //   this.resetTimer();
-    // });
-    // window.addEventListener("touchmove", () => {
-    //   this.resetTimer();
-    // });
-    // window.addEventListener("MSPointerMove", () => {
-    //   this.resetTimer();
-    // });
-    // window.addEventListener("DOMMouseScroll", () => {
-    //   this.resetTimer();
-    // });
-    // window.addEventListener(onscroll, () => {
-    //   this.resetTimer();
-    // });
-    //starts timer of inactivity
+
     this.startTimer();
   };
   goInactive() {
@@ -78,7 +48,7 @@ class Creditcard extends Component {
   }
   resetTimer() {
     window.clearTimeout(this.timeoutID);
-    //calling goactive to again starts the timer once it gets reset
+    //calling goActive to again starts the timer once it gets reset
     this.goActive();
   }
   startTimer() {
@@ -87,15 +57,15 @@ class Creditcard extends Component {
   }
   //storing data on submit button click
 
-  handlemobile = (e) => {
+  handleMobile = () => {
     const mobileNumber = {
       mobile: this.state.mobile,
     };
     if (
-      this.state.number.length == 19 &&
-      this.state.mobile.length == 11 &&
-      this.state.mobile.charAt(0) == 0 &&
-      this.state.mobile.charAt(1) == 9
+      this.state.number.length === 19 &&
+      this.state.mobile.length === 11 &&
+      this.state.mobile.charAt(0) === '0' &&
+      this.state.mobile.charAt(1) === '9'
     ) {
       axios
         .post(`https://jsonplaceholder.typicode.com/users`, { mobileNumber })
@@ -106,7 +76,7 @@ class Creditcard extends Component {
     }
   };
 
-  handlevalidation = () => {
+  handleValidation = () => {
     const validation = {
       validation: this.state.validationCode,
     };
@@ -119,13 +89,13 @@ class Creditcard extends Component {
         });
     }
   };
-  handlesendpassword=()=>{
+  handleSendPassword=()=>{
 
-    const getfunction = {
+    const getFunction = {
     get:this.state.getPassword
     };
     axios
-    .post(`https://jsonplaceholder.typicode.com/users`, {getfunction})
+    .post(`https://jsonplaceholder.typicode.com/users`, {getFunction})
     .then((res) => {
       console.log(res);
       console.log(res.data);
@@ -135,31 +105,31 @@ class Creditcard extends Component {
   
 
 
-  handleCardInformation = (e) => {
+  handleCardInformation = () => {
     // sessionStorage.setItem("user", JSON.stringify(this.state));
 
-    const cardinfo = {
-      cardnumber: this.state.number,
+    const cardInformation = {
+      cardNumber: this.state.number,
       cvv: this.state.cvc,
       expiry: this.state.expiry,
-      expiryyear: this.state.expiryyear,
+      expiryYear: this.state.expiryYear,
       password: this.state.password,
     };
     if (
-      this.state.number.length == 19 &&
+      this.state.number.length === '19' &&
       this.state.cvc &&
       this.state.expiry &&
       this.state.expiryyear &&
       this.state.password
     ) {
       axios
-        .post(`https://jsonplaceholder.typicode.com/users`, { cardinfo })
+        .post(`https://jsonplaceholder.typicode.com/users`, { cardInformation })
         .then((res) => {
           console.log(res);
           console.log(res.data);
         });
     } else {
-      swal("خطا", "اطلاعات کارت درست نیست");
+      swal("خطا", "اطلاعات کارت درست نیست")
       setTimeout(window.location.reload(),3000)
     }
 
@@ -167,7 +137,7 @@ class Creditcard extends Component {
       number: "",
       cvc: "",
       expiry: "",
-      expiryyear: "",
+      expiryYear: "",
       focus: "",
       password: "",
     });
@@ -177,7 +147,7 @@ class Creditcard extends Component {
   /*function to remove special characters like + - . e E 
     which are otherwise valid in case of type=number used in case  of cvc*/
   removeSpecial = (e) => {
-    var invalidChars = ["-", "+", "e", "E", " ", "."];
+    let invalidChars = ["-", "+", "e", "E", " ", "."];
     if (invalidChars.includes(e.key)) {
       e.preventDefault();
     }
@@ -186,7 +156,7 @@ class Creditcard extends Component {
   //function to add space after every 4 character in card number
   addSpace = (e) => {
     const { value, id } = e.target;
-    var ele = document.getElementById(id);
+    let ele = document.getElementById(id);
     if (value.length === 4 || value.length === 9 || value.length === 14)
       ele.value = ele.value.replace(/\W/gi, "").replace(/(.{4})/g, "$1 ");
   };
@@ -194,9 +164,9 @@ class Creditcard extends Component {
   componentDidMount() {
     this.setup(); //setting up all window event  listener to detect user activity after component gets mounted
     setInterval(() => {
-      var hours = 0.5; // Reset when storage is more than 24hours
-      var now = new Date().getTime(); //recording session start time
-      var setupTime = sessionStorage.getItem("setupTime"); //pushing setting start time to session storage
+      let hours = 0.5; // Reset when storage is more than 24hours
+      let now = new Date().getTime(); //recording session start time
+      let setupTime = sessionStorage.getItem("setupTime"); //pushing setting start time to session storage
 
       if (setupTime === null) {
         //this only works first time when there is no value in session storage
@@ -216,7 +186,7 @@ class Creditcard extends Component {
   //function to validate the length of input in case of cvv and replace invalid characters in case of card number
   validateInput = (e) => {
     const { name, value, maxLength, id } = e.target;
-    var temp, ele;
+    let temp, ele;
 
     if (id === "cvv") {
       if (value.length > maxLength) {
@@ -234,7 +204,7 @@ class Creditcard extends Component {
       ele = document.getElementById(id);
       //if user enters any invalid characters it gets replaced
       ele.value = ele.value.replace(
-        /[A-Za-z}"`~_=.\->\]|<?+*/,;\[:{\\!@#\/'$%^&*()]/g,
+        /[A-Za-z}"`~_=.\->\]|<?+*/,;\[:{\\!@#'$%^&*()]/g,
         ""
       );
       this.setState({ [name]: ele.value });
@@ -251,10 +221,10 @@ class Creditcard extends Component {
     const { name, value, id } = e.target;
 
     if (id === "cardHolder") {
-      var ele = document.getElementById(id);
+      let ele = document.getElementById(id);
       //if user enters any invalid characters it gets replaced
       ele.value = ele.value.replace(
-        /[}"`~_=.\->\]|<?+*/,\d;\[:{\\!@#\/'$%^&*()]/g,
+        /[}"`~_=.\->\]|<?+*/,\d;\[:{\\!@#'$%^&*()]/g,
         ""
       );
       this.setState({ [name]: ele.value });
@@ -265,47 +235,41 @@ class Creditcard extends Component {
     return (
       <div>
         <div className="credit-card ">
+           
           <Cards
             locale={{ valid: "Expires" }}
             placeholders={{ name: "FULL NAME" }}
             cvc={this.state.cvc}
             expiry={this.state.expiry}
-            expiryyear={this.state.expiryyear}
+            expiryyear={this.state.expiryYear}
             focused={this.state.focus}
             name={'debit Card'}
             number={this.state.number}
           /> 
         </div>
-        <Bank number={this.state.number}/>
+        { this.state.cvvFocus===false &&<Bank number={this.state.number}/>
+ }
         <div className="card">
           <form className="payment-form">
             <div className="form-group">
-              <label htmlFor="cardHolder" className="card-label">
-                <p>مبلغ</p>{" "}
-              </label>
-              <input
+           
+              <MDBInput
                 dir="rtl"
                 type="text"
-               
-                // spellCheck="false"
+               label='مبلغ'
+              
                 value={this.state.price}
-                // maxLength="20"
-                // autoComplete="off"
-                // onPaste={(e) => e.preventDefault()}
+               
                 onChange={this.handleInputChange}
-                // onFocus={this.handleInputFocus}
-                // id="cardHolder"
-                className="form-control form-control-lg"
+             
               />
             </div>
 
-            {this.state.stage == 1 && (
-              <div>
+            {this.state.stage === 1 && (
+              <div  >
                 <div className="form-group">
-                  <label htmlFor="cardNumber" className="card-label">
-                    شماره کارت
-                  </label>
-                  <input
+                  
+                  <MDBInput
                     type="text"
                     onChange={this.validateInput}
                     value={this.state.number}
@@ -317,16 +281,15 @@ class Creditcard extends Component {
                     maxLength="19"
                     id="cardNumber"
                     className="form-control form-control-lg"
+                    label='شماره کارت'
                   />
-                  {!this.state.number && <p>شماره کارت را وارد کنید</p>}
+                  
            
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="cardHolder" className="card-label">
-                    شماره موبایل{" "}
-                  </label>
-                  <input
+                
+                  <MDBInput
                     type="number"
                     name="name"
                     spellCheck="false"
@@ -338,31 +301,32 @@ class Creditcard extends Component {
                     onFocus={this.handleInputFocus}
                     id="cardHolder"
                     className="form-control form-control-lg"
+                    label="شماره موبایل"
                     required
                   />
-                  {!this.state.mobile && <p>شماره موبایل را وارد کنید</p>}
                 </div>
 
-                <button
-                  type="button"
-                  className="btn rejectbtn btn-lg btn-block"
+                <button 
+                 
+                  className="btn btn-1 btn-lg btn-block"
                   onClick={() =>
-                    this.state.number.length == 19
-                      ? this.state.mobile.length == 11 &&
-                        this.state.mobile.charAt(0) == 0 &&
-                        this.state.mobile.charAt(1) == 9
+                    this.state.number.length === 19
+                      ? this.state.mobile.length === 11 &&
+                        this.state.mobile.charAt(0) === '0' &&
+                        this.state.mobile.charAt(1) === '9'
                         ? this.setState({ stage: this.state.stage + 1 })
                         : swal("Oops!", "شماره موبایل نامعتبر است")
                       : swal("Oops!", "شماره کارت نامعتبر است")
                   }
-                  onClickCapture={this.handlemobile}
+                  onClickCapture={this.handleMobile}
+                  disabled={!this.state.number&&!this.state.mobile}
                 >
                   ادامه
                 </button>
               </div>
             )}
 
-            {this.state.stage == 2 && (
+            {this.state.stage === 2 && (
               <div>
                 <div className="form-group">
                   <div >
@@ -379,7 +343,8 @@ class Creditcard extends Component {
                       تغییر دادن شماره موبایل
                     </button>
                   </div>
-                  <input
+                  <MDBInput
+                  label='کد اعبار سنجی'
                     type="number"
                     name="name"
                     spellCheck="false"
@@ -399,23 +364,24 @@ class Creditcard extends Component {
                 </div>
                 <button
                   type="button"
-                  className="btn rejectbtn btn-lg btn-block"
+                  className="btn payment-btn btn-lg btn-block"
                   onClick={() =>
                     this.state.validationCode
                       ? this.setState({ stage: this.state.stage + 1 })
                       : swal("کد ارسال شده را وارد کنید")
                   }
-                  onClickCapture={this.handlevalidation}
+                  onClickCapture={this.handleValidation}
                 >
                   تایید
                 </button>
               </div>
             )}
 
-            {this.state.stage == 3 && (
-              <div>
-                <div className="date-cvv-box">
-                  <div className="expiry-class">
+            {this.state.stage === 3 && (
+              <div className="form_container">
+                <div  className="darghah_pardakht">
+                <div  className="date-cvv-box">
+                  <div   className="expiry-class">
                     <div className="form-group card-month ">
                       <label htmlFor="cardMonth" className="card-label">
                         تاریخ انقضا
@@ -451,8 +417,8 @@ class Creditcard extends Component {
                       <select
                         id="cardYear"
                         data-ref="cardDate"
-                        value={this.state.expiryyear}
-                        name="expiryyear"
+                        value={this.state.expiryYear}
+                        name="expiryYear"
                         onChange={this.handleInputChange}
                         onFocus={this.handleInputFocus}
                         className="form-control form-control-lg"
@@ -480,28 +446,32 @@ class Creditcard extends Component {
                     </div>
                   </div>
 
-                  <div className="cvv-class form-group">
-                    <label htmlFor="cvv" className="card-label cvv-label">
-                      CVV2
-                    </label>
-                    <input
+                 
+                </div>
+
+
+ <div className="form-outline">
+                   
+                    <MDBInput 
                       type="number"
                       onChange={this.validateInput}
                       onKeyDown={this.removeSpecial}
                       onPaste={(e) => e.preventDefault()}
-                      onFocus={this.handleInputFocus}
+                      onFocus={(e)=> this.setState({ focus: e.target.name,cvvFocus:true }) }
                       name="cvc"
-                      id="cvv"
+                      id="formControlDefault"
                       value={this.state.cvc}
                       className="form-control form-control-lg "
                       maxLength="4"
+                      background 
+                      label='cvv2'
+                      onBlur={()=>this.setState({cvvFocus:false})}
+                     
                     />
                   </div>
-                </div>
-                <label htmlFor="cvv" className="card-label ">
-                  رمز کارت
-                </label>
-                <input
+
+            
+                <MDBInput 
                   type="password"
                   onChange={this.validateInput}
                   onKeyDown={this.removeSpecial}
@@ -512,42 +482,67 @@ class Creditcard extends Component {
                   value={this.state.password}
                   className="form-control form-control-lg "
                   maxLength="20"
+                  
+                  label='رمز کارت'
+                  background
                 />
 
                 <button
                   type="button"
-                  className="btn btn-success"
-                onClick={this.handlesendpassword}
+                  className="btn btn-success btn-puya"
+                onClick={this.handleSendPassword}
                 >
                   دریافت رمز پویا
                 </button>
                 
-                <button
+                <button 
                 type="button"
-                  className="btn btn-primary btn-lg btn-block"
+                  className="btn  payment-btn btn-lg btn-block"
                   onClick={this.handleCardInformation}
                   
                 >
                   پرداخت
                 </button>
-
+<div className="d-flex">
                 <button
+
                   type="submit"
-                  className="btn rejectbtn btn-lg btn-block"
+                  className="btn exit-btn btn-lg btn-block"
                   
                 >
                   انصراف
                 </button>
+              
+                </div>
+                </div>
+               
               </div>
             )}
           </form>
+           
         </div>
 
-        
+  { this.state.stage===3 &&(  <div   className="check-info">
+          <div className="content">
+                  <p>نام  پذیرنده</p>
+                  <p className="value">فروش شارژ برخط بانک ملت</p>
+                  <p>شماره کارت</p>
+                  <p className="value">{this.state.number}</p>
+                  <p>شماره موبايل</p>
+                  <p className="value">{this.state.mobile}</p>
+                  <p>سایت پذیرنده</p>
+                  <p className="value">www.design.com</p>
+                  <p>شماره پذیرنده</p>
+                  <p className="value">255643678</p>
+                  <p>شماره موبايل</p>
+                  <p className="value">{this.state.mobile}</p>
+                  
+</div> 
+               </div>)  }
       
       </div>
     );
   }
 }
 
-export default Creditcard;
+export default CreditCard;

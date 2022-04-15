@@ -1,0 +1,269 @@
+.rccs {
+    margin: 0px auto;
+  
+    perspective: 1000px;
+    z-index: 5;
+    position: relative;
+    flex-wrap: wrap;
+    max-width: 430px;
+    
+   
+  }
+  
+  @media (max-width: 576px) {
+    .rccs {
+      max-width: 310px;
+    }
+    .rccs__card {
+      max-width: 310px;
+      height: 220px !important;
+      width: 90%;
+    }
+    .rccs__number {
+      left: 10% !important;
+      font-size: 21px !important;
+    }
+  }
+  @media (max-width: 330px) {
+    .rccs__card {
+      width: 80%;
+      height: 200px !important;
+    }
+  }
+  .rccs__card {
+    height: 270px;
+    margin: auto;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: all 0.4s linear;
+    max-width: 430px;
+    flex-wrap: wrap;
+    
+  }
+  
+  .rccs__card--front,
+  .rccs__card--back {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    /* background: linear-gradient(25deg, #131970, #56b4e3); */
+    border-radius: 14.5px;
+    color: #fff;
+  
+    height: 100%;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    transform-style: preserve-3d;
+    width: 100%;
+  
+    box-shadow: 0 30px 60px 0 rgba(90, 116, 148, 0.4);
+  }
+  
+  .rccs__card--front {
+    z-index: 20!important;
+  }
+  .rccs__card--back {
+    transform: rotateY(180deg);
+    z-index: 20;
+
+  }
+  .rccs__card--back .rccs__issuer {
+    background-position: bottom center;
+    bottom: 5%;
+    left: 50%;
+    opacity:0;
+    background-color: #222;
+    right: auto;
+    top: auto;
+    transform: translateX(-50%);
+    z-index: 20!important;
+  }
+  .rccs__card__background {
+    height: 200%;
+    left: -170%;
+    position: absolute;
+    top: -60%;
+    transform: rotate(25deg);
+    transition: all 0.5s ease-out;
+    width: 150%;
+    left: -170%;
+  }
+  .rccs__card--flipped {
+    transform: rotateY(180deg);
+  }
+  .rccs__card--flipped .rccs__card--front {
+    z-index: 10!important;
+  }
+  .rccs__card--flipped .rccs__card--back {
+    z-index: 20!important;
+  }
+  .rccs__card--unknown > div {
+    background: linear-gradient(25deg, rgb(4, 79, 165), rgb(7, 41, 133),rgb(34, 11, 97));
+    
+  
+    box-shadow: 0 30px 60px 0 rgba(90, 116, 148, 0.4);
+  }
+  .rccs__card--unknown .rccs__issuer {
+    visibility: visible;
+    width: 84.89px;
+    height: 45px;
+    z-index: 20!important;
+  }
+  .rccs__card:not(.rccs__card--unknown) .rccs__card__background {
+    left: -22%;
+  }
+ 
+  .rccs__card--amex .rccs__cvc__front {
+    opacity: 0.8;
+    visibility: visible;
+  }
+  
+  .rccs__card--dinersclub > div {
+    color: #555;
+  }
+  .rccs__card--dinersclub .rccs__card__background {
+    background: linear-gradient(25deg, rgb(11, 128, 60), rgb(10, 128, 55));
+  }
+  
+  .rccs__card--discover > div {
+    color: #555;
+  }
+  .rccs__card--discover .rccs__card__background {
+    background: linear-gradient(25deg, rgb(133, 114, 7), rgb(238, 200, 76));
+  }
+  
+  .rccs__card--elo .rccs__card__background {
+    background: linear-gradient(25deg, #211c18, #aaa7a2);
+  }
+  
+  .rccs__card--maestro > div,
+  .rccs__card--mastercard > div {
+    color: #555;
+  }
+  .rccs__card--maestro .rccs__card__background,
+  
+  .rccs__card--visa .rccs__card__background,
+  .rccs__card--visaelectron .rccs__card__background {
+    background: linear-gradient(25deg, #0f509e, #1399cd);
+  }
+  .rccs__card--visa .rccs__issuer,
+  .rccs__card--visaelectron .rccs__issuer {
+    background-size: 75%;
+  }
+  
+  .rccs__number {
+    clear: both;
+    font-family: "Consolas", "Courier", monospace;
+    font-size: 25px;
+    left: 20%;
+  
+    flex-wrap: wrap;
+    font-weight: 500;
+    position: absolute;
+    top: 45%;
+  }
+  .rccs__number.rccs__number--large {
+    font-size: 25px;
+  }
+  .rccs__name {
+    bottom: 15%;
+    font-family: "Consolas", "Courier", monospace;
+    font-size: 20px;
+    left: 10%;
+  
+    line-height: 1;
+    overflow: hidden;
+    position: absolute;
+    text-align: left;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    width: 60%;
+  }
+  .rccs__expiry {
+    bottom: 15%;
+    font-size: 0;
+    line-height: 1;
+    position: absolute;
+    right: 10%;
+  }
+  .rccs__expiry > * {
+    vertical-align: middle;
+  }
+  .rccs__expiry__valid {
+    font-size: 10px;
+    margin-bottom: 5px;
+  }
+  .rccs__expiry__value {
+    font-family: "Consolas", "Courier", monospace;
+    font-size: 16px;
+  }
+  .rccs__number,
+  .rccs__name,
+  .rccs__expiry,
+  .rccs__cvc {
+    opacity: 0.5;
+    transition: opacity 0.3s;
+  }
+  .rccs__chip {
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 40.59px;
+    left: 10%;
+    position: absolute;
+    top: 10%;
+    width: 50px;
+  }
+  .rccs__issuer {
+    background-position: top right;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 23%;
+    position: absolute;
+    right: 10%;
+    top: 10%;
+    width: 40%;
+  }
+  .rccs__stripe {
+     z-index: 5;
+    background-color: #000000;
+    height: 30%;
+    left: 0;
+    position: absolute;
+    top: 0%;
+    width: 100%;
+   
+  }
+  .rccs__signature {
+   
+    height: 18%;
+    left: 5%;
+    position: absolute;
+    top: 35%;
+    width: 75%;
+  }
+  .rccs__cvc {
+    color: #222;
+    font-family: "Consolas", "Courier", monospace;
+    font-size: 14px;
+    left: 67%;
+    line-height: 1;
+    position: absolute;
+    top: 42%;
+  }
+  .rccs__cvc__front {
+    font-family: "Consolas", "Courier", monospace;
+    font-size: 11.9px;
+    opacity: 0;
+    position: absolute;
+    right: 10%;
+    top: 38%;
+    visibility: hidden;
+  }
+  .rccs--filled {
+    opacity: 0.8 !important;
+  }
+  .rccs--focused {
+    font-weight: 700;
+    opacity: 1 !important;
+  }

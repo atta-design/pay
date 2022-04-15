@@ -1,9 +1,7 @@
-import '../src/Component/css/credit-card.css'
-import './Component/bootstrap.min.css'
-import './Component/style.css'
-import './Component/css/form-style.css'
-import Creditcard from './Component/payment_getway-ui';
-
+import './css/credit-card.css'
+import './css/bootstrap.min.css'
+import './css/form-style.css'
+import CreditCard from './Component/payment_getway-ui';
 
 
 
@@ -13,8 +11,7 @@ function App() {
    
     
    <>
-<Creditcard/>
-
+<CreditCard/>
 
  </>
    
