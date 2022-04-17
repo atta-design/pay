@@ -1,7 +1,40 @@
+@font-face {
+  font-family: "CustomFont";
+  src: url("/src/fonts/Vazir.ttf");
+  src: url("/src/fonts/Vazir-Bold.woff") format("woff");
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "CustomFont", Arial, sans-serif !important;
+  background-color: rgb(7, 63, 104) !important;
+}
+.payment-getway {
+  position: relative;
+}
 
-
-
-
+.credit-card {
+  margin-top: 20px;
+  z-index: 2;
+  top: 0;
+  flex-wrap: wrap;
+  position: sticky !important;
+  direction: ltr !important;
+}
+.card {
+  max-width: 500px;
+  margin: auto;
+  text-align: right !important;
+  z-index: 1;
+  flex-wrap: wrap;
+  border-radius: 10px 10px 10px 10px !important;
+  box-shadow: 0 30px 60px 0 rgba(133, 147, 168);
+  position: relative;
+  background-color: rgb(242, 237, 230);
+}
+.payment-form {
+  margin: 40px 35px 20px 35px;
+}
 .form-group {
   display: flex;
   align-items: center;
@@ -12,24 +45,12 @@
   width: 100%;
 }
 
-.credit-card {
-  margin-top: 20px;
-  z-index: 2;
-  top: 0px;
-  flex-wrap: wrap;
-  position: sticky !important;
+.card-label {
+  color: #1a3b5d;
   direction: ltr !important;
+  font-size: 14px;
 }
 
-.payment-form {
-  margin: 40px 35px 20px 35px;
-}
-
-
-
-
-
- 
 #cardYear {
   margin-top: 30px;
   margin-left: 15px;
@@ -54,55 +75,30 @@
   flex: 1;
 }
 
-.card-label {
-  color: #1a3b5d;
-  direction: ltr !important;
-  font-size: 14px;
-}
 
-.card {
-  max-width: 500px;
-  margin: auto;
-  text-align: right !important;
-  z-index: 1;
-  flex-wrap: wrap;
-  border-radius: 10px 10px 10px 10px !important;
-  box-shadow: 0 30px 60px 0 rgba(133, 147, 168);
-
-  background-color: rgb(242, 237, 230);
-}
-
-.btn {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 5px 10px 0 rgba(90, 116, 148, 0.4);
-}
-.payment {
-  flex-wrap: wrap;
-  display: flex;
-}
 
 p {
   direction: rtl !important;
   text-align: right !important;
 }
 
-.check-info {
+.check-information {
   background-color: rgb(11, 4, 107);
   display: flex;
   flex-direction: column;
-  width: 18%;
+  width: 44%;
   color: azure;
-  margin-left: 65.4vw;
-  margin-top: -670px !important;
-  border-radius: 0px 30px 30px 0px;
+  position: absolute;
+  top: 0;
+  left: 497px;
+  border-radius: 0 30px 30px 0;
   padding: 5px;
   height: 670px;
 }
-.content {
+.information-content {
   margin: 7px auto;
 }
-.value {
+.information-values {
   color: rgba(255, 255, 0, 0.781);
 }
 .info_container {
@@ -114,73 +110,12 @@ p {
   flex-direction: column;
 }
 
-@media only screen and (max-width: 1400px) {
-  .check-info {
-    margin-left: 66.4vw;
-  }
-}
-@media only screen and (max-width: 1350px) {
-  .check-info {
-    margin-left: 67.9vw;
-  }
-}
-@media only screen and (max-width: 1300px) {
-  .check-info {
-    margin-left: 68.2vw;
-  }
-}
-@media only screen and (max-width: 1250px) {
-  .check-info {
-    margin-left: 69vw;
-  }
-}
-@media only screen and (max-width: 1200px) {
-  .check-info {
-    margin-left: 70vw;
-  }
-}
-@media only screen and (max-width: 1150px) {
-  .check-info {
-    margin-left: 73vw;
-  }
-}
-
-html {
-  height: 100%;
-}
-@font-face {
-  font-family: "CustomFont";
-  src: url("/src/fonts/Vazir.ttf");
-  /* src: url("/src/fonts/Vazir-Bold.woff") format("woff"),
-url("/src/fonts/CustomFont.otf") format("opentype"),
-url("/src/fonts/") format("svg"); */
-}
-body {
-  margin: 0;
-  padding: 0;
-  font-family: "CustomFont", Arial, sans-serif !important;
-  background-color: rgb(7, 63, 104) !important;
-}
-
-.sbtn {
-  padding: 8px 70px;
-  font-size: 16px;
-  background-color: #141e30;
-  border: none;
-  color: aliceblue;
-}
-#exampleModal {
-  text-align: right;
-}
-#exampleModal2 {
-  text-align: right;
-}
 label {
   text-align: right !important;
 }
 .bank {
   z-index: 3;
-  top: 0px;
+  top: 0;
   margin-left: 56vw;
   margin-top: -250px;
   margin-bottom: 220px;
@@ -190,61 +125,12 @@ label {
   margin: 10px;
   margin-left: -6vw !important;
 }
-@media only screen and (max-width: 1300px) {
-  .bank {
-    margin-left: 60vw;
-  }
-  .bankName {
-    margin: 10px;
-    margin-left: -10vw !important;
-  }
+.btn {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 5px 10px 0 rgba(90, 116, 148, 0.4);
 }
-@media only screen and (max-width: 1200px) {
-  .check-info {
-    display: none !important;
-  }
-}
-@media only screen and (max-width: 1000px) {
-  .bank {
-    margin-left: 64vw;
-  }
-  .bankName {
-    margin: 10px;
-    margin-left: -13vw !important;
-  }
-  .check-info {
-    display: none !important;
-  }
-}
-@media only screen and (max-width: 576px) {
-  .bank {
-    margin-left: 64vw;
-    width: 20px;
-    font-size: 10px;
-  }
-  .bankName {
-    margin: 10px;
-    margin-left: -20vw !important;
-  }
-  .check-info {
-    display: none !important;
-  }
-}
-@media only screen and (max-width: 407px) {
-  .bank {
-    margin-left: 64vw;
-    width: 20px;
-    font-size: 10px;
-  }
-  .bankName {
-    margin: 10px;
-    margin-left: -30vw !important;
-  }
-  .check-info {
-    display: none;
-  }
-}
-.btn-1 {
+.next-btn {
   border-radius: 30px 30px 30px 30px;
   background-color: rgb(8, 8, 119);
   color: #fff;
@@ -266,4 +152,62 @@ label {
 }
 .form-label {
   color: aliceblue;
+}
+@media only screen and (max-width: 1300px) {
+  .bank {
+    margin-left: 60vw;
+  }
+  .bankName {
+    margin: 10px;
+    margin-left: -10vw !important;
+  }
+  .check-information {
+    display: none !important;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .bank {
+    margin-left: 64vw;
+  }
+  .bankName {
+    margin: 10px;
+    margin-left: -13vw !important;
+  }
+  .check-information {
+    display: none !important;
+  }
+}
+@media only screen and (max-width: 576px) {
+  .bank {
+    margin-left: 64vw;
+    width: 20px;
+    font-size: 10px;
+  }
+  .bankName {
+    margin: 10px;
+    margin-left: -20vw !important;
+  }
+  .check-information {
+    display: none !important;
+  }
+  .Bank-logo {
+    width: 50px;
+    height: 40px;
+    margin-top: 30px;
+  }
+}
+@media only screen and (max-width: 407px) {
+  .bank {
+    margin-left: 64vw;
+    width: 20px;
+    font-size: 10px;
+  }
+  .bankName {
+    margin: 10px;
+    margin-left: -30vw !important;
+  }
+  .check-info {
+    display: none;
+  }
 }

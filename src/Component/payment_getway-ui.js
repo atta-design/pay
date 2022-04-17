@@ -7,7 +7,7 @@ import swal from "sweetalert";
 import axios from "axios";
 import Bank from "./bank";
 
-import { MDBInput } from 'mdbreact';
+import { MDBInput } from "mdbreact";
 class CreditCard extends Component {
   timeoutID;
   constructor(props) {
@@ -15,8 +15,8 @@ class CreditCard extends Component {
     this.myRef = React.createRef();
     this.myRefcvv = React.createRef();
     this.state = {
-      cvvFocus:false,
-      toggle:false,
+      cvvFocus: false,
+      toggle: false,
       stage: 1,
       cvc: "",
       expiry: "",
@@ -27,20 +27,16 @@ class CreditCard extends Component {
       mobile: "",
       price: "100,000تومان",
       validationCode: "",
-      getPassword:()=>{}
+      getPassword: () => {},
     };
   }
 
   setup = () => {
-
     this.startTimer();
   };
   goInactive() {
-   
-    
-     swal("زمان متقضی شد");
-     window.location.reload();
-
+    swal("زمان متقضی شد");
+    window.location.reload();
   }
   goActive() {
     //starting timer
@@ -64,8 +60,8 @@ class CreditCard extends Component {
     if (
       this.state.number.length === 19 &&
       this.state.mobile.length === 11 &&
-      this.state.mobile.charAt(0) === '0' &&
-      this.state.mobile.charAt(1) === '9'
+      this.state.mobile.charAt(0) === "0" &&
+      this.state.mobile.charAt(1) === "9"
     ) {
       axios
         .post(`https://jsonplaceholder.typicode.com/users`, { mobileNumber })
@@ -89,21 +85,17 @@ class CreditCard extends Component {
         });
     }
   };
-  handleSendPassword=()=>{
-
+  handleSendPassword = () => {
     const getFunction = {
-    get:this.state.getPassword
+      get: this.state.getPassword,
     };
     axios
-    .post(`https://jsonplaceholder.typicode.com/users`, {getFunction})
-    .then((res) => {
-      console.log(res);
-      console.log(res.data);
-    });
-  }
-
-  
-
+      .post(`https://jsonplaceholder.typicode.com/users`, { getFunction })
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+      });
+  };
 
   handleCardInformation = () => {
     // sessionStorage.setItem("user", JSON.stringify(this.state));
@@ -116,7 +108,7 @@ class CreditCard extends Component {
       password: this.state.password,
     };
     if (
-      this.state.number.length === '19' &&
+      this.state.number.length === "19" &&
       this.state.cvc &&
       this.state.expiry &&
       this.state.expiryyear &&
@@ -129,8 +121,8 @@ class CreditCard extends Component {
           console.log(res.data);
         });
     } else {
-      swal("خطا", "اطلاعات کارت درست نیست")
-      setTimeout(window.location.reload(),3000)
+      swal("خطا", "اطلاعات کارت درست نیست");
+      setTimeout(window.location.reload(), 3000);
     }
 
     this.setState({
@@ -141,7 +133,6 @@ class CreditCard extends Component {
       focus: "",
       password: "",
     });
-   
   };
 
   /*function to remove special characters like + - . e E 
@@ -233,9 +224,8 @@ class CreditCard extends Component {
 
   render() {
     return (
-      <div>
+      <div className="payment-getway">
         <div className="credit-card ">
-           
           <Cards
             locale={{ valid: "Expires" }}
             placeholders={{ name: "FULL NAME" }}
@@ -243,32 +233,26 @@ class CreditCard extends Component {
             expiry={this.state.expiry}
             expiryyear={this.state.expiryYear}
             focused={this.state.focus}
-            name={'debit Card'}
+            name={"debit Card"}
             number={this.state.number}
-          /> 
+          />
         </div>
-        { this.state.cvvFocus===false &&<Bank number={this.state.number}/>
- }
+        {this.state.cvvFocus === false && <Bank number={this.state.number} />}
         <div className="card">
           <form className="payment-form">
             <div className="form-group">
-           
               <MDBInput
                 dir="rtl"
                 type="text"
-               label='مبلغ'
-              
+                label="مبلغ"
                 value={this.state.price}
-               
                 onChange={this.handleInputChange}
-             
               />
             </div>
 
             {this.state.stage === 1 && (
-              <div  >
+              <div>
                 <div className="form-group">
-                  
                   <MDBInput
                     type="text"
                     onChange={this.validateInput}
@@ -281,14 +265,11 @@ class CreditCard extends Component {
                     maxLength="19"
                     id="cardNumber"
                     className="form-control form-control-lg"
-                    label='شماره کارت'
+                    label="شماره کارت"
                   />
-                  
-           
                 </div>
 
                 <div className="form-group">
-                
                   <MDBInput
                     type="number"
                     name="name"
@@ -306,20 +287,19 @@ class CreditCard extends Component {
                   />
                 </div>
 
-                <button 
-                 
-                  className="btn btn-1 btn-lg btn-block"
+                <button
+                  className="btn next-btn btn-lg btn-block"
                   onClick={() =>
                     this.state.number.length === 19
                       ? this.state.mobile.length === 11 &&
-                        this.state.mobile.charAt(0) === '0' &&
-                        this.state.mobile.charAt(1) === '9'
+                        this.state.mobile.charAt(0) === "0" &&
+                        this.state.mobile.charAt(1) === "9"
                         ? this.setState({ stage: this.state.stage + 1 })
                         : swal("Oops!", "شماره موبایل نامعتبر است")
                       : swal("Oops!", "شماره کارت نامعتبر است")
                   }
                   onClickCapture={this.handleMobile}
-                  disabled={!this.state.number&&!this.state.mobile}
+                  disabled={!this.state.number && !this.state.mobile}
                 >
                   ادامه
                 </button>
@@ -329,7 +309,7 @@ class CreditCard extends Component {
             {this.state.stage === 2 && (
               <div>
                 <div className="form-group">
-                  <div >
+                  <div>
                     <label htmlFor="cardHolder" className="card-label">
                       {" "}
                       کد ارسال شده به شماره{this.state.mobile} را وارد کنید
@@ -344,7 +324,7 @@ class CreditCard extends Component {
                     </button>
                   </div>
                   <MDBInput
-                  label='کد اعبار سنجی'
+                    label="کد اعبار سنجی"
                     type="number"
                     name="name"
                     spellCheck="false"
@@ -379,167 +359,156 @@ class CreditCard extends Component {
 
             {this.state.stage === 3 && (
               <div className="form_container">
-                <div  className="darghah_pardakht">
-                <div  className="date-cvv-box">
-                  <div   className="expiry-class">
-                    <div className="form-group card-month ">
-                      <label htmlFor="cardMonth" className="card-label">
-                        تاریخ انقضا
-                      </label>
+                <div className="darghah_pardakht">
+                  <div className="date-cvv-box">
+                    <div className="expiry-class">
+                      <div className="form-group card-month ">
+                        <label htmlFor="cardMonth" className="card-label">
+                          تاریخ انقضا
+                        </label>
 
-                      <select
-                        id="cardMonth"
-                        data-ref="cardDate"
-                        value={this.state.expiry}
-                        name="expiry"
-                        onChange={this.handleInputChange}
-                        onFocus={this.handleInputFocus}
-                        className="form-control form-control-lg"
-                      >
-                        <option value="" defaultChecked="true">
-                          ماه
-                        </option>
-                        <option value="01">01</option>
-                        <option value="02">02</option>
-                        <option value="03">03</option>
-                        <option value="04">04</option>
-                        <option value="05">05</option>
-                        <option value="06">06</option>
-                        <option value="07">07</option>
-                        <option value="08">08</option>
-                        <option value="09">09</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                      </select>
-                    </div>
-                    <div className="form-group card-year">
-                      <select
-                        id="cardYear"
-                        data-ref="cardDate"
-                        value={this.state.expiryYear}
-                        name="expiryYear"
-                        onChange={this.handleInputChange}
-                        onFocus={this.handleInputFocus}
-                        className="form-control form-control-lg"
-                      >
-                        <option value="" defaultChecked="true">
-                          سال
-                        </option>
-                        <option value="1395">1395</option>
-                        <option value="1396">1396</option>
-                        <option value="1397">1397</option>
-                        <option value="1398">1398</option>
-                        <option value="1399">1399</option>
-                        <option value="1400">1400</option>
-                        <option value="1401">1401</option>
-                        <option value="1402">1402</option>
-                        <option value="1403">1403</option>
-                        <option value="1404">1404</option>
-                        <option value="1405">1405</option>
-                        <option value="1406">1406</option>
-                        <option value="1407">1407</option>
-                        <option value="1408">1408</option>
-                        <option value="1409">1409</option>
-                        <option value="1410">1410</option>
-                      </select>
+                        <select
+                          id="cardMonth"
+                          data-ref="cardDate"
+                          value={this.state.expiry}
+                          name="expiry"
+                          onChange={this.handleInputChange}
+                          onFocus={this.handleInputFocus}
+                          className="form-control form-control-lg"
+                        >
+                          <option value="" defaultChecked="true">
+                            ماه
+                          </option>
+                          <option value="01">01</option>
+                          <option value="02">02</option>
+                          <option value="03">03</option>
+                          <option value="04">04</option>
+                          <option value="05">05</option>
+                          <option value="06">06</option>
+                          <option value="07">07</option>
+                          <option value="08">08</option>
+                          <option value="09">09</option>
+                          <option value="10">10</option>
+                          <option value="11">11</option>
+                          <option value="12">12</option>
+                        </select>
+                      </div>
+                      <div className="form-group card-year">
+                        <select
+                          id="cardYear"
+                          data-ref="cardDate"
+                          value={this.state.expiryYear}
+                          name="expiryYear"
+                          onChange={this.handleInputChange}
+                          onFocus={this.handleInputFocus}
+                          className="form-control form-control-lg"
+                        >
+                          <option value="" defaultChecked="true">
+                            سال
+                          </option>
+                          <option value="1395">1395</option>
+                          <option value="1396">1396</option>
+                          <option value="1397">1397</option>
+                          <option value="1398">1398</option>
+                          <option value="1399">1399</option>
+                          <option value="1400">1400</option>
+                          <option value="1401">1401</option>
+                          <option value="1402">1402</option>
+                          <option value="1403">1403</option>
+                          <option value="1404">1404</option>
+                          <option value="1405">1405</option>
+                          <option value="1406">1406</option>
+                          <option value="1407">1407</option>
+                          <option value="1408">1408</option>
+                          <option value="1409">1409</option>
+                          <option value="1410">1410</option>
+                        </select>
+                      </div>
                     </div>
                   </div>
 
-                 
-                </div>
-
-
- <div className="form-outline">
-                   
-                    <MDBInput 
+                  <div className="form-outline">
+                    <MDBInput
                       type="number"
                       onChange={this.validateInput}
                       onKeyDown={this.removeSpecial}
                       onPaste={(e) => e.preventDefault()}
-                      onFocus={(e)=> this.setState({ focus: e.target.name,cvvFocus:true }) }
+                      onFocus={(e) =>
+                        this.setState({ focus: e.target.name, cvvFocus: true })
+                      }
                       name="cvc"
                       id="formControlDefault"
                       value={this.state.cvc}
                       className="form-control form-control-lg "
                       maxLength="4"
-                      background 
-                      label='cvv2'
-                      onBlur={()=>this.setState({cvvFocus:false})}
-                     
+                      background
+                      label="cvv2"
+                      onBlur={() => this.setState({ cvvFocus: false })}
                     />
                   </div>
 
-            
-                <MDBInput 
-                  type="password"
-                  onChange={this.validateInput}
-                  onKeyDown={this.removeSpecial}
-                  onPaste={(e) => e.preventDefault()}
-                  onFocus={this.handleInputFocus}
-                  name="password"
-                  id="password"
-                  value={this.state.password}
-                  className="form-control form-control-lg "
-                  maxLength="20"
-                  
-                  label='رمز کارت'
-                  background
-                />
+                  <MDBInput
+                    type="password"
+                    onChange={this.validateInput}
+                    onKeyDown={this.removeSpecial}
+                    onPaste={(e) => e.preventDefault()}
+                    onFocus={this.handleInputFocus}
+                    name="password"
+                    id="password"
+                    value={this.state.password}
+                    className="form-control form-control-lg "
+                    maxLength="20"
+                    label="رمز کارت"
+                    background
+                  />
 
-                <button
-                  type="button"
-                  className="btn btn-success btn-puya"
-                onClick={this.handleSendPassword}
-                >
-                  دریافت رمز پویا
-                </button>
-                
-                <button 
-                type="button"
-                  className="btn  payment-btn btn-lg btn-block"
-                  onClick={this.handleCardInformation}
-                  
-                >
-                  پرداخت
-                </button>
-<div className="d-flex">
-                <button
+                  <button
+                    type="button"
+                    className="btn btn-success btn-puya"
+                    onClick={this.handleSendPassword}
+                  >
+                    دریافت رمز پویا
+                  </button>
 
-                  type="submit"
-                  className="btn exit-btn btn-lg btn-block"
-                  
-                >
-                  انصراف
-                </button>
-              
+                  <button
+                    type="button"
+                    className="btn  payment-btn btn-lg btn-block"
+                    onClick={this.handleCardInformation}
+                  >
+                    پرداخت
+                  </button>
+                  <div className="d-flex">
+                    <button
+                      type="submit"
+                      className="btn exit-btn btn-lg btn-block"
+                    >
+                      انصراف
+                    </button>
+                  </div>
                 </div>
-                </div>
-               
               </div>
             )}
           </form>
-           
-        </div>
+       
 
-  { this.state.stage===3 &&(  <div   className="check-info">
-          <div className="content">
-                  <p>نام  پذیرنده</p>
-                  <p className="value">فروش شارژ برخط بانک ملت</p>
-                  <p>شماره کارت</p>
-                  <p className="value">{this.state.number}</p>
-                  <p>شماره موبايل</p>
-                  <p className="value">{this.state.mobile}</p>
-                  <p>سایت پذیرنده</p>
-                  <p className="value">www.design.com</p>
-                  <p>شماره پذیرنده</p>
-                  <p className="value">255643678</p>
-                  <p>شماره موبايل</p>
-                  <p className="value">{this.state.mobile}</p>
-                  
-</div> 
-               </div>)  }
-      
+        {this.state.stage === 3 && (
+          <div className="check-information">
+            <div className="information-content">
+              <p>نام پذیرنده</p>
+              <p className="information-values">فروش شارژ برخط بانک ملت</p>
+              <p>شماره کارت</p>
+              <p className="information-values">{this.state.number}</p>
+              <p>شماره موبايل</p>
+              <p className="information-values">{this.state.mobile}</p>
+              <p>سایت پذیرنده</p>
+              <p className="information-values">www.atta-design.com</p>
+              <p>شماره پذیرنده</p>
+              <p className="information-values">255643678</p>
+            
+            </div>
+          </div>
+        )}
+         </div>
       </div>
     );
   }

@@ -1,5 +1,5 @@
 .rccs {
-    margin: 0px auto;
+    margin: 0 auto;
   
     perspective: 1000px;
     z-index: 5;
@@ -87,7 +87,7 @@
     transform: rotate(25deg);
     transition: all 0.5s ease-out;
     width: 150%;
-    left: -170%;
+
   }
   .rccs__card--flipped {
     transform: rotateY(180deg);
@@ -230,7 +230,7 @@
     height: 30%;
     left: 0;
     position: absolute;
-    top: 0%;
+    top: 0;
     width: 100%;
    
   }

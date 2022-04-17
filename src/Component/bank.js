@@ -411,7 +411,7 @@ import shetab from '../logos/271_7d200a78f2b67db67929c426bd94e341.png'
     return (
         <div className='bank'>
         {' '}
-        <img src={logo} alt='logo'  height='50px' width='60px'/>
+        <img src={logo} alt='logo' className='Bank-logo'  height='50px' width='60px'/>
          <div className='bankName'>{bankName}</div>
         </div>
     )
